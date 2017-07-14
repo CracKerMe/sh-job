@@ -30,8 +30,23 @@
 </script>
 <style>
 	.VuePagination__pagination-item{
-		padding: 4px;
-		background: #1388ff;
 		display: inline-block;
+    border: 1px solid #ededed;
+    height: 21px;
+    line-height: 21px;
+    padding: 3px 10px;
+    margin: 0 5px;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
 	}
+  .VuePagination__pagination-itema a{ 
+    display: block;
+  }
+  .VuePagination__pagination-item.active{
+    background-color: #00b38a!important;
+    color: #fff!important;
+    font-weight: 700;
+    border-color: #00b38a!important;
+  }
 </style>

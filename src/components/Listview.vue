@@ -58,6 +58,30 @@ export default {
         'company_name': '上海艾艺文化有限公司',
         'jobType': '2',
         'ctime': '2017-07012 13:00:00'
+      }, {
+        'id': '123',
+        'keywords': ['高薪', '弹性工作'],
+        'area': '上海浦东新区',
+        'minYear': '0',
+        'academic': '2',
+        'finacing': '4',
+        'minWage': '5000',
+        'maxWage': '10000',
+        'company_name': '上海艾艺文化有限公司',
+        'jobType': '2',
+        'ctime': '2017-07012 13:00:00'
+      }, {
+        'id': '123',
+        'keywords': ['高薪', '弹性工作'],
+        'area': '上海浦东新区',
+        'minYear': '0',
+        'academic': '2',
+        'finacing': '4',
+        'minWage': '5000',
+        'maxWage': '10000',
+        'company_name': '上海艾艺文化有限公司',
+        'jobType': '2',
+        'ctime': '2017-07012 13:00:00'
       }]
     }
   },
