@@ -113,7 +113,7 @@ export default {
 </script>
 <style scoped lang="less">
   .list-part{
-    width: 800px;
+    // width: 800px;
     >div{
         color: #555;
         border: 1px solid #ededed;

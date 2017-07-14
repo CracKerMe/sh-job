@@ -10,31 +10,37 @@
     name: 'search'
   }
 </script>
-<style>
+<style scoped>
+  .search{
+    overflow: hidden;
+  }
   .keyword{
     display: inline-block;
-    margin-right: 30px;
+    float: left;
     padding: 13px 15px;
-    width: 66%;
+    width: 76%;
     height: 18px;
     line-height: 18px;
     font-size: 16px;
+    outline: none;
   }
   .adminSearch{
+    float: right;
     margin-top: 0;
     font-size: 16px;
     line-height: 16px;
-    border: 2px solid transparent;
+    border: 0 solid transparent;
     -moz-background-clip: padding;
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
-    padding: 15px 55px;
+    padding: 16px 55px;
     background-color: #00b38a;
     color: #fff;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     -ms-border-radius: 3px;
     border-radius: 3px;
+    outline: none;
   }
   .adminSearch:hover{
     background-color: #00a57f;

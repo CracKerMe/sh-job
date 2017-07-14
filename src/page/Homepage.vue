@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app">
     <!-- 搜索组件 -->
     <search></search>
     <!-- 筛选组件 -->
@@ -29,6 +29,13 @@
 })
 </script>
 <style>
+   .app{
+     min-width: 755px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
+  } 
 	.VuePagination__pagination-item{
 		display: inline-block;
     border: 1px solid #ededed;
