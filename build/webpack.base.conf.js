@@ -25,7 +25,8 @@ module.exports = {
       '@': resolve('src'),
 			'component': resolve('src/components'),
 			'common': resolve('src/common'),
-			'api': resolve('src/api')
+      'api': resolve('src/api'),
+      'page': resolve('src/page')
     }
   },
   module: {
@@ -43,9 +44,6 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: vueLoaderConfig
-      },{
-        test: /\.less$/,
-        loader: 'style-loader!css-loader!less-loader'
       },
       {
         test: /\.js$/,

@@ -1,12 +1,14 @@
 <template>
   <div id="app">
 		<m-header></m-header>
-    <!-- <router-view></router-view> -->
+		<transition name="silide">
+			<router-view></router-view>
+		</transition>
   </div>
 </template>
 
 <script>
-import mHeader from 'component/header/header'
+import mHeader from 'component/Header'
 export default {
   name: 'app',
   components: {
@@ -14,8 +16,7 @@ export default {
   }
 }
 </script>
-
 <style>
-	@import 'common/css/reset.css'
+	 @import 'common/css/reset.css'; 
 </style>
 

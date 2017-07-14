@@ -2,6 +2,19 @@
 
 > a job-find website work for shanghai web front-end 
 
+- Components
+  - Header(顶部导航区域)
+  - Listview(列表区)
+  - Pagination(分页组件)
+  - Search(搜索)
+  - Selector(筛选)
+
+- page
+  - HomePage (主页)
+  - Jddetail(JD详情)
+  - Landpage(登陆页面)
+  - Publishpage(JD发布页面)
+
 ## Build Setup
 
 ``` bash
