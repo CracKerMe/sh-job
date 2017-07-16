@@ -21,26 +21,58 @@
         </div>
         <li class="multi-chosen">
           <span class="title">工作经验：</span>
-          <a href="javascript:;" v-for="item of obj['minYear']">
+          <a href="javascript:;" :class="{'active': item.active}" v-for="(item, index) of obj['minYear']" :key="index" @click="clickListNav(obj['minYear'], item)">
             {{item.name}}
             <i class="delete"></i>
           </a>
         </li>
         <li class="multi-chosen">
           <span class="title">学历要求：</span>
-          <a href="javascript:;" v-for="item of obj['academic']">
+          <a href="javascript:;" :class="{'active': item.active}" :key="index" v-for="(item, index) of obj['academic']" @click="clickListNav(obj['academic'], item)">
             {{item.name}}
             <i class="delete"></i>
           </a>
         </li>
         <li class="multi-chosen">
           <span class="title">融资阶段：</span>
-          <a href="javascript:;" v-for="item of obj['financing']">
+          <a href="javascript:;" :class="{'active': item.active}" :key="index" v-for="(item, index) of obj['financing']" @click="clickListNav(obj['financing'], item)">
             {{item.name}}
             <i class="delete"></i>
           </a>
         </li>
       </div>
+    </ul>
+    <ul class="order" id="order">
+      <li class="wrapper">
+        <div class="item salary selectUI" :class="{'active': selectActive == 'money'}">
+          <span class="title">月薪：</span>
+          <div class="selectUI-text text" @click.stop="clickSelect('money')">
+            <span>不限</span>
+            <i></i>
+            <ul>
+              <li>
+                <a href="javascript:;" v-for="(item, index) of obj['money']" :key="index" @click="clickListNav(obj['money'], item)">
+                  {{item.name}}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="item type selectUI" :class="{'active': selectActive == 'property'}">
+          <span class="title">工作性质：</span>
+          <div class="selectUI-text value text" @click.stop="clickSelect('property')">
+            <span>不限</span>
+            <i></i>
+            <ul>
+              <li>
+                <a href="javascript:;" v-for="(item, index) of obj['property']" :key="index" @click="clickListNav(obj['property'], item)">
+                  {{item.name}}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
     </ul>
   </div>
 </template>
@@ -52,7 +84,8 @@ export default {
       obj: {
         minYear: [
           {
-            name: '不限'
+            name: '不限',
+            active: true
           },
           {
             name: '应届毕业生'
@@ -76,7 +109,8 @@ export default {
         academic: [
           {
             id: '0',
-            name: '不限'
+            name: '不限',
+            active: true
           },
           {
             id: '1',
@@ -98,7 +132,8 @@ export default {
         financing: [
           {
             id: '0',
-            name: '不限'
+            name: '不限',
+            active: true
           },
           {
             id: '1',
@@ -128,13 +163,94 @@ export default {
             id: '7',
             name: '上市'
           }
+        ],
+        property: [
+          {
+            name: '不限'
+          },
+          {
+            name: '全职'
+          },
+          {
+            name: '实习'
+          },
+          {
+            name: '私活'
+          },
+          {
+            name: '兼职'
+          },
+          {
+            name: '其他'
+          }
+        ],
+        money: [
+          {
+            name: '不限'
+          },
+          {
+            name: '2k以下'
+          },
+          {
+            name: '2k-5k'
+          },
+          {
+            name: '5k-10k'
+          },
+          {
+            name: '10k-15k'
+          },
+          {
+            name: '25k-50k'
+          },
+          {
+            name: '50k以上'
+          }
         ]
-      }
+      },
+      // select框焦点
+      selectActive: ''
     }
+  },
+  computed: {
+  },
+  methods: {
+    // 点击select框
+    clickSelect (type) {
+      // type 所点select框种类
+
+      if (type === this.selectAcitve) {
+        this.selectAcitve = ''
+        return
+      }
+      this.selectActive = type
+    },
+    // 点击列表导航
+    clickListNav (itemArr, item) {
+      // item 所点的列表对象
+      // itemArr item所属的对象
+
+      itemArr.forEach((val, index, arr) => {
+        this.$set(val, 'active', false)
+      }, this)
+      this.$set(item, 'active', true)
+    }
+  },
+  created () {
+
   }
 }
 </script>
 <style>
+.filter-wrapper {
+  margin-top: 18px;
+  font-size: 14px;
+}
+.order{
+  padding-left: 24px;
+}
+
+
 /*!search-result/modules/common/main.less*/
 
 #lg_tnav .inner {
@@ -178,6 +294,7 @@ export default {
 #backtop {
   margin-left: 630px
 }
+
 
 
 /*!common/components/pager/main.less*/
@@ -227,13 +344,14 @@ export default {
 }
 
 
+
 /*!search-result/modules/switch-city/main.less*/
 
 #switchCity {
   position: relative;
   height: 72px;
   padding: 0 85px;
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/switch-city/img/location_6057e05.png) no-repeat 20px center #fffadc
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/switch-city/img/location_6057e05.png) no-repeat 20px center #fffadc
 }
 
 #switchCity p {
@@ -278,7 +396,7 @@ export default {
   display: block;
   width: 15px;
   height: 15px;
-  background: transparent url( https://www.lgstatic.com/www/static/search-result/modules/switch-city/img/close_31d7021.png) no-repeat center center;
+  background: transparent url(https://www.lgstatic.com/www/static/search-result/modules/switch-city/img/close_31d7021.png) no-repeat center center;
   outline: 0;
   border: 0;
   cursor: pointer;
@@ -300,9 +418,11 @@ export default {
 }
 
 
+
 /*!common/components/jquery-ui-custom/jquery-ui.custom.css*/
 
 @charset "utf-8";
+
 
 /*! Includes: jquery.ui.core.css, jquery.ui.autocomplete.css, jquery.ui.menu.css */
 
@@ -640,19 +760,17 @@ export default {
 
 .ui-icon,
 .ui-widget-content .ui-icon {
-  background-image: url( https://www.lgstatic.com/www/static/common/components/jquery-ui-custom/img/ui-icons_222222_256x240_a1b3887.png)
+  background-image: url(https://www.lgstatic.com/www/static/common/components/jquery-ui-custom/img/ui-icons_222222_256x240_a1b3887.png)
 }
 
 .ui-widget-header .ui-icon {
-  background-image: url( https://www.lgstatic.com/www/static/common/components/jquery-ui-custom/img/ui-icons_ffffff_256x240_e3f4748.png)
+  background-image: url(https://www.lgstatic.com/www/static/common/components/jquery-ui-custom/img/ui-icons_ffffff_256x240_e3f4748.png)
 }
 
-.ui-state-highlight .ui-icon {
-}
+.ui-state-highlight .ui-icon {}
 
 .ui-state-error .ui-icon,
-.ui-state-error-text .ui-icon {
-}
+.ui-state-error-text .ui-icon {}
 
 .ui-icon-blank {
   background-position: 16px 16px
@@ -1393,6 +1511,7 @@ export default {
 }
 
 
+
 /*!search-result/modules/search-bar/main.less*/
 
 .search-wrapper {
@@ -1576,6 +1695,7 @@ export default {
 }
 
 
+
 /*!search-result/modules/company-card/main.less*/
 
 .company-card {
@@ -1688,22 +1808,22 @@ export default {
 
 .company-card .cl_r .cl_r_bot .list_c .address span {
   top: 4px;
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -105px -8px
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -105px -8px
 }
 
 .company-card .cl_r .cl_r_bot .list_c .indu span {
   top: 4px;
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -80px -7px
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -80px -7px
 }
 
 .company-card .cl_r .cl_r_bot .list_c .posi span {
   top: 4px;
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -55px -7px
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -55px -7px
 }
 
 .company-card .cl_r .cl_r_bot .list_c .inter span {
   top: 4px;
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -30px -7px
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -30px -7px
 }
 
 .company-card .cl_r .cl_r_bot .list_c li.c_btn {
@@ -1729,8 +1849,9 @@ export default {
   margin-top: -8.5px;
   width: 17px;
   height: 17px;
-  background: transparent url( https://www.lgstatic.com/www/static/search-result/modules/company-card/img/icon_index_small_382f804.png) no-repeat center
+  background: transparent url(https://www.lgstatic.com/www/static/search-result/modules/company-card/img/icon_index_small_382f804.png) no-repeat center
 }
+
 
 
 /*!search-result/modules/filter/main.less*/
@@ -1760,7 +1881,7 @@ ul.filter-wrapper .multi-chosen .chosen .delete {
   top: 7px;
   width: 11px;
   height: 11px;
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/filter/img/delete_filter_icon_41c99f2.png) no-repeat
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/filter/img/delete_filter_icon_41c99f2.png) no-repeat
 }
 
 ul.filter-wrapper .multi-chosen .chosen+.chosen {
@@ -1912,7 +2033,7 @@ ul.filter-wrapper .has-more .workPosition .right-arrow {
   margin-top: 5px;
   width: 12px;
   height: 16px;
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/filter/img/arrow_right_f2fff85.png) no-repeat
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/filter/img/arrow_right_f2fff85.png) no-repeat
 }
 
 ul.filter-wrapper .has-more .workPosition .active {
@@ -1985,7 +2106,7 @@ ul.filter-wrapper .has-more .choose-detail .right-arrow {
   margin-top: 5px;
   width: 12px;
   height: 16px;
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/filter/img/arrow_right_f2fff85.png) no-repeat
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/filter/img/arrow_right_f2fff85.png) no-repeat
 }
 
 ul.filter-wrapper .has-more #all_city {
@@ -2023,12 +2144,13 @@ ul.filter-wrapper .seo-all-hide {
   width: 36px;
   border: 1px solid #ededed;
   border-top-color: #fafafa;
-  background: #fafafa url( https://www.lgstatic.com/www/static/search-result/modules/filter/img/arrow_up_b7a7618.png) center no-repeat
+  background: #fafafa url(https://www.lgstatic.com/www/static/search-result/modules/filter/img/arrow_up_b7a7618.png) center no-repeat
 }
 
 .btn-collapse-wrapper .btn-collapse.collapsed {
-  background-image: url( https://www.lgstatic.com/www/static/search-result/modules/filter/img/arrow_down_861e6c6.png)
+  background-image: url(https://www.lgstatic.com/www/static/search-result/modules/filter/img/arrow_down_861e6c6.png)
 }
+
 
 
 /*!search-result/modules/order/main.less*/
@@ -2193,7 +2315,7 @@ ul.order .wrapper .item.page .next::selection {
 
 ul.order .wrapper .item.page .prev {
   float: left;
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) -148px -4px no-repeat
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) -148px -4px no-repeat
 }
 
 ul.order .wrapper .item.page .prev:hover {
@@ -2206,7 +2328,7 @@ ul.order .wrapper .item.page .prev.ban:hover {
 
 ul.order .wrapper .item.page .next {
   float: right;
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) -168px -4px no-repeat
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) -168px -4px no-repeat
 }
 
 ul.order .wrapper .item.page .next:hover {
@@ -2228,6 +2350,7 @@ ul.order .wrapper .item.page .page-number .curNum {
 }
 
 
+
 /*!search-result/modules/list-tips/main.less*/
 
 .list_tip_wrapper {
@@ -2247,7 +2370,7 @@ ul.order .wrapper .item.page .page-number .curNum {
   top: 10px;
   width: 15px;
   height: 15px;
-  background: transparent url( https://www.lgstatic.com/www/static/search-result/modules/list-tips/img/icon_close_ff6829c.png) no-repeat center center;
+  background: transparent url(https://www.lgstatic.com/www/static/search-result/modules/list-tips/img/icon_close_ff6829c.png) no-repeat center center;
   outline: 0;
   border: 0;
   cursor: pointer;
@@ -2269,6 +2392,7 @@ ul.order .wrapper .item.page .page-number .curNum {
 #paiListTip {
   display: none
 }
+
 
 
 /*!search-result/modules/history/main.less*/
@@ -2338,6 +2462,7 @@ ul.order .wrapper .item.page .page-number .curNum {
 }
 
 
+
 /*!search-result/modules/positions/main.less*/
 
 .no_position_wrapper {
@@ -2365,7 +2490,7 @@ ul.order .wrapper .item.page .page-number .curNum {
   float: left;
   width: 130px;
   height: 150px;
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -10px -30px
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -10px -30px
 }
 
 .no_position_wrapper .no_position .txt {
@@ -2487,7 +2612,7 @@ ul.order .wrapper .item.page .page-number .curNum {
   width: 12px;
   height: 16px;
   margin-right: 10px;
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -10px -10px
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -10px -10px
 }
 
 .s_position_list .list_item_top .company {
@@ -2519,7 +2644,7 @@ ul.order .wrapper .item.page .page-number .curNum {
   width: 16px;
   height: 18px;
   margin-left: .5em;
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/positions/img/approve_aae725a.png) no-repeat 0 0;
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/positions/img/approve_aae725a.png) no-repeat 0 0;
   vertical-align: middle;
   cursor: pointer
 }
@@ -2631,7 +2756,7 @@ ul.order .wrapper .item.page .page-number .curNum {
   float: left;
   width: 130px;
   height: 150px;
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -10px -30px
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -10px -30px
 }
 
 .s_position_list .empty_position .txt {
@@ -2667,7 +2792,7 @@ ul.order .wrapper .item.page .page-number .curNum {
 }
 
 .pos_icon_1 {
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_1_88509c3.png) no-repeat 0 0;
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_1_88509c3.png) no-repeat 0 0;
   margin-top: 8px
 }
 
@@ -2676,36 +2801,36 @@ ul.order .wrapper .item.page .page-number .curNum {
 }
 
 .pos_icon_11 {
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_11_306f5bd.png) no-repeat 0 0;
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_11_306f5bd.png) no-repeat 0 0;
   margin-top: 8px
 }
 
 .pos_icon_12 {
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_12_d85dfed.png) no-repeat 0 -2px
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_12_d85dfed.png) no-repeat 0 -2px
 }
 
 .pos_icon_13 {
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_13_cbe68bc.png) no-repeat 0 0;
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_13_cbe68bc.png) no-repeat 0 0;
   margin-top: 8px
 }
 
 .pos_icon_14 {
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_14_9e18d95.png) no-repeat 0 0;
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_14_9e18d95.png) no-repeat 0 0;
   margin-top: 8px
 }
 
 .pos_icon_15 {
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_15_e8488a9.png) no-repeat 0 0;
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_15_e8488a9.png) no-repeat 0 0;
   margin-top: 8px
 }
 
 .pos_icon_16 {
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_16_2ceaf2b.png) no-repeat 0 0;
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_16_2ceaf2b.png) no-repeat 0 0;
   margin-top: 8px
 }
 
 .pos_icon_17 {
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_17_49ab4cb.png) no-repeat 0 0;
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_17_49ab4cb.png) no-repeat 0 0;
   margin-top: 8px
 }
 
@@ -2716,7 +2841,7 @@ only screen and (min-device-pixel-ratio:2),
 only screen and (min-resolution:192dpi),
 only screen and (min-resolution:2dppx) {
   .s_position_list .list_item_top .company .company_name .company_mark {
-    background-image: url( https://www.lgstatic.com/www/static/search-result/modules/positions/img/approve@2x_16f87e8.png);
+    background-image: url(https://www.lgstatic.com/www/static/search-result/modules/positions/img/approve@2x_16f87e8.png);
     background-size: 16px 18px
   }
 }
@@ -2726,7 +2851,7 @@ only screen and (min-resolution:2dppx) {
   position: relative;
   width: 25px;
   height: 25px;
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/positions/img/icon-chat_4a70ffc.png) no-repeat 0 0;
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/positions/img/icon-chat_4a70ffc.png) no-repeat 0 0;
   cursor: pointer;
   margin-left: 2px;
   margin-top: 3px
@@ -2743,7 +2868,7 @@ only screen and (min-device-pixel-ratio:2),
 only screen and (min-resolution:192dpi),
 only screen and (min-resolution:2dppx) {
   .pos_icon_1 {
-    background-image: url( https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_1@2x_88bb924.png);
+    background-image: url(https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_1@2x_88bb924.png);
     background-size: 74px 21px;
     background-repeat: no-repeat
   }
@@ -2752,17 +2877,17 @@ only screen and (min-resolution:2dppx) {
     background-repeat: no-repeat
   }
   .pos_icon_11 {
-    background-image: url( https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_11@2x_3695a17.png);
+    background-image: url(https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_11@2x_3695a17.png);
     background-size: 74px 21px;
     background-repeat: no-repeat
   }
   .pos_icon_12 {
-    background-image: url( https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_12@2x_e1514fa.png);
+    background-image: url(https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_12@2x_e1514fa.png);
     background-size: 74px 21px;
     background-repeat: no-repeat
   }
   .pos_icon_13 {
-    background-image: url( https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_13@2x_9297375.png);
+    background-image: url(https://www.lgstatic.com/www/static/search-result/modules/positions/img/nomal_position_13@2x_9297375.png);
     background-size: 74px 21px;
     background-repeat: no-repeat
   }
@@ -2783,18 +2908,19 @@ only screen and (min-resolution:2dppx) {
     background-repeat: no-repeat
   }
   .chat_me {
-    background-image: url( https://www.lgstatic.com/www/static/search-result/modules/positions/img/icon-chat@2x_a67ba9e.png);
+    background-image: url(https://www.lgstatic.com/www/static/search-result/modules/positions/img/icon-chat@2x_a67ba9e.png);
     background-size: 25px 25px
   }
 }
+
 
 
 /*!search-result/modules/company/main.less*/
 
 .company_list {
   margin-top: 18px;
-  width: 960px ;
-  padding:17px 0
+  width: 960px;
+  padding: 17px 0
 }
 
 .company_list .item_con_list {
@@ -2926,17 +3052,17 @@ only screen and (min-resolution:2dppx) {
 
 .company_list .cl_r .cl_r_bot .list_c .indu span {
   top: 4px;
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -80px -7px
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -80px -7px
 }
 
 .company_list .cl_r .cl_r_bot .list_c .posi span {
   top: 4px;
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -55px -7px
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -55px -7px
 }
 
 .company_list .cl_r .cl_r_bot .list_c .inter span {
   top: 4px;
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -30px -7px
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -30px -7px
 }
 
 .company_list .cl_r .cl_r_bot .list_c li.c_btn {
@@ -2957,7 +3083,7 @@ only screen and (min-resolution:2dppx) {
   display: inline-block;
   width: 20px;
   height: 20px;
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -128px -7px;
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -128px -7px;
   position: relative;
   top: 3px
 }
@@ -2982,7 +3108,7 @@ only screen and (min-resolution:2dppx) {
   float: left;
   width: 130px;
   height: 150px;
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -10px -30px
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/common/img/icons_6084500.png) no-repeat -10px -30px
 }
 
 .company_list .empty_position .txt {
@@ -3005,6 +3131,7 @@ only screen and (min-resolution:2dppx) {
   margin-top: 35px;
   text-align: center
 }
+
 
 
 /*!search-result/modules/recommendCompanyCity/main.less*/
@@ -3075,11 +3202,11 @@ only screen and (min-resolution:2dppx) {
   width: 12px;
   height: 7px;
   margin-left: 2px;
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/recommendCompanyCity/img/arrow_down_7b6f2e2.png) 0 0 no-repeat
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/recommendCompanyCity/img/arrow_down_7b6f2e2.png) 0 0 no-repeat
 }
 
 .recommend-comp-city .expansion .i-up {
-  background: url( https://www.lgstatic.com/www/static/search-result/modules/recommendCompanyCity/img/arrow_up_544eb78.png) 0 0 no-repeat
+  background: url(https://www.lgstatic.com/www/static/search-result/modules/recommendCompanyCity/img/arrow_up_544eb78.png) 0 0 no-repeat
 }
 
 .recommend-comp-city .expansion:hover {
@@ -3090,6 +3217,7 @@ only screen and (min-resolution:2dppx) {
   height: 70px;
   overflow: hidden;
 }
+
 
 
 /*!search-result/page/index/main.less*/
