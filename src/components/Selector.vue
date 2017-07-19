@@ -21,23 +21,23 @@
         </div>
         <li class="multi-chosen">
           <span class="title">工作经验：</span>
-          <a href="javascript:;" :class="{'active': item.active}" v-for="(item, index) of obj['minYear']" :key="index" @click="clickListNav(obj['minYear'], item)">
+          <a href="javascript:;" :class="{'active': item.active}" v-for="(item, index) of obj['minYear']" :key="index" @click="activeChange(obj['minYear'], item)">
             {{item.name}}
-            <i class="delete"></i>
+            <i class="delete" v-if="index"></i>
           </a>
         </li>
         <li class="multi-chosen">
           <span class="title">学历要求：</span>
-          <a href="javascript:;" :class="{'active': item.active}" :key="index" v-for="(item, index) of obj['academic']" @click="clickListNav(obj['academic'], item)">
+          <a href="javascript:;" :class="{'active': item.active}" :key="index" v-for="(item, index) of obj['academic']" @click="activeChange(obj['academic'], item)">
             {{item.name}}
-            <i class="delete"></i>
+            <i class="delete" v-if="index"></i>
           </a>
         </li>
         <li class="multi-chosen">
           <span class="title">融资阶段：</span>
-          <a href="javascript:;" :class="{'active': item.active}" :key="index" v-for="(item, index) of obj['financing']" @click="clickListNav(obj['financing'], item)">
+          <a href="javascript:;" :class="{'active': item.active}" :key="index" v-for="(item, index) of obj['financing']" @click="activeChange(obj['financing'], item)">
             {{item.name}}
-            <i class="delete"></i>
+            <i class="delete" v-if="index"></i>
           </a>
         </li>
       </div>
@@ -47,11 +47,11 @@
         <div class="item salary selectUI" :class="{'active': selectActive == 'money'}">
           <span class="title">月薪：</span>
           <div class="selectUI-text text" @click.stop="clickSelect('money')">
-            <span>不限</span>
+            <span>{{selectMoneyType}}</span>
             <i></i>
             <ul>
               <li>
-                <a href="javascript:;" v-for="(item, index) of obj['money']" :key="index" @click="clickListNav(obj['money'], item)">
+                <a href="javascript:;" v-for="(item, index) of obj['money']" :key="index" @click="activeChange(obj['money'], item)">
                   {{item.name}}
                 </a>
               </li>
@@ -61,11 +61,11 @@
         <div class="item type selectUI" :class="{'active': selectActive == 'property'}">
           <span class="title">工作性质：</span>
           <div class="selectUI-text value text" @click.stop="clickSelect('property')">
-            <span>不限</span>
+            <span>{{selectPropertyType}}</span>
             <i></i>
             <ul>
               <li>
-                <a href="javascript:;" v-for="(item, index) of obj['property']" :key="index" @click="clickListNav(obj['property'], item)">
+                <a href="javascript:;" v-for="(item, index) of obj['property']" :key="index" @click.stop="activeChange(obj['property'], item)">
                   {{item.name}}
                 </a>
               </li>
@@ -166,7 +166,8 @@ export default {
         ],
         property: [
           {
-            name: '不限'
+            name: '不限',
+            active: true
           },
           {
             name: '全职'
@@ -186,7 +187,8 @@ export default {
         ],
         money: [
           {
-            name: '不限'
+            name: '不限',
+            active: true
           },
           {
             name: '2k以下'
@@ -213,27 +215,44 @@ export default {
     }
   },
   computed: {
+    // 所选月薪
+    selectMoneyType () {
+      return this.obj['money'].filter(val => {
+        return val.active
+      })[0]['name']
+    },
+    // 所选工作性质
+    selectPropertyType () {
+      return this.obj['property'].filter(val => {
+        return val.active
+      })[0]['name']
+    }
   },
   methods: {
     // 点击select框
     clickSelect (type) {
       // type 所点select框种类
+      // item 所点的数据
 
-      if (type === this.selectAcitve) {
-        this.selectAcitve = ''
+      // this.activeChange(this.obj[type], item)
+      if (type === this.selectActive) {
+        this.selectActive = ''
         return
       }
       this.selectActive = type
     },
-    // 点击列表导航
-    clickListNav (itemArr, item) {
-      // item 所点的列表对象
+    // 焦点变化
+    activeChange (itemArr, item) {
+      // item 所点的列表数据
       // itemArr item所属的对象
 
       itemArr.forEach((val, index, arr) => {
         this.$set(val, 'active', false)
       }, this)
       this.$set(item, 'active', true)
+
+      // 取消select框焦点
+      this.selectActive = ''
     }
   },
   created () {
@@ -252,6 +271,20 @@ export default {
 
 
 /*!search-result/modules/common/main.less*/
+
+ul.filter-wrapper .multi-chosen a.active {
+    position: relative;
+      /* padding: 5px 7px 5px 8px;   */
+    background-color: #00b38a;
+    color: #fff;
+}
+
+ul.filter-wrapper .multi-chosen a.active .delete {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    background: url(https://www.lgstatic.com/www/static/search-result/modules/filter/img/delete_filter_icon_41c99f2.png) no-repeat
+}
 
 #lg_tnav .inner {
   width: 1200px
