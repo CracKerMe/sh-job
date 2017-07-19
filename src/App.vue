@@ -4,19 +4,22 @@
 		<transition name="silide">
 			<router-view></router-view>
 		</transition>
+    <tfooter></tfooter>
   </div>
 </template>
 
 <script>
 import Theader from 'component/Theader'
+import Tfooter from 'component/Foot'
 export default {
   name: 'app',
   components: {
-    Theader
+    Theader,
+    Tfooter
   }
 }
 </script>
 <style>
-	 @import 'common/css/reset.css'; 
+	 @import 'common/css/reset.css';
 </style>
 
