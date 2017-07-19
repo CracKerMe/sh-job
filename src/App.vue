@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-		<m-header></m-header>
+		<theader></theader>
 		<transition name="silide">
 			<router-view></router-view>
 		</transition>
@@ -8,11 +8,11 @@
 </template>
 
 <script>
-import mHeader from 'component/Header'
+import Theader from 'component/Theader'
 export default {
   name: 'app',
   components: {
-    mHeader
+    Theader
   }
 }
 </script>
