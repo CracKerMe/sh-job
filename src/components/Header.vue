@@ -15,8 +15,7 @@
 				</li>
 			</ul>
 			<p class="fr">
-				<span>登录</span>
-				<span>注册</span>
+				<router-link to='/login'>登录</router-link>
 			</p>
 		</div>
 	</div>
