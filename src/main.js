@@ -5,8 +5,10 @@ import App from './App'
 import router from './router'
 import 'common/less/config.less'
 import service from './plugin/service'
+import filter from './plugin/filter'
 Vue.config.productionTip = false
 Vue.use(service)
+Vue.use(filter)
 
 import store from './store'
 
