@@ -95,7 +95,7 @@
   select{
     float: left;
     margin-top: 8px;
-    display: inline-block;
+    display: block;
     width: 200px;
     height: 30px;
   }
