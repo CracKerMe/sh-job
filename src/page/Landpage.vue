@@ -42,29 +42,7 @@ export default {
   name: 'landpage'
 }
 </script>
-<style>
-.fl {
-	float: left;
-}
-
-.fr {
-	float: right;
-}
-
-.clearfix {
-	zoom: 1;
-}
-
-.clearfix:before,
-.clearfix:after {
-	content: "";
-	display: table;
-}
-
-.clearfix:after {
-	clear: both;
-}
-
+<style scoped>
 label,
 select,
 button,
