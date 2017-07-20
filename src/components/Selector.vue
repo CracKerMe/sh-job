@@ -21,23 +21,23 @@
         </div>
         <li class="multi-chosen">
           <span class="title">工作经验：</span>
-          <a href="javascript:;" :class="{'active': item.active}" v-for="(item, index) of obj['minYear']" :key="index" @click="clickListNav(obj['minYear'], item)">
+          <a href="javascript:;" :class="{'active': item.active}" v-for="(item, index) of obj['minYear']" :key="index" @click="activeChange(obj['minYear'], item)">
             {{item.name}}
-            <i class="delete"></i>
+            <i class="delete" v-if="index"></i>
           </a>
         </li>
         <li class="multi-chosen">
           <span class="title">学历要求：</span>
-          <a href="javascript:;" :class="{'active': item.active}" :key="index" v-for="(item, index) of obj['academic']" @click="clickListNav(obj['academic'], item)">
+          <a href="javascript:;" :class="{'active': item.active}" :key="index" v-for="(item, index) of obj['academic']" @click="activeChange(obj['academic'], item)">
             {{item.name}}
-            <i class="delete"></i>
+            <i class="delete" v-if="index"></i>
           </a>
         </li>
         <li class="multi-chosen">
           <span class="title">融资阶段：</span>
-          <a href="javascript:;" :class="{'active': item.active}" :key="index" v-for="(item, index) of obj['financing']" @click="clickListNav(obj['financing'], item)">
+          <a href="javascript:;" :class="{'active': item.active}" :key="index" v-for="(item, index) of obj['financing']" @click="activeChange(obj['financing'], item)">
             {{item.name}}
-            <i class="delete"></i>
+            <i class="delete" v-if="index"></i>
           </a>
         </li>
       </div>
@@ -47,25 +47,25 @@
         <div class="item salary selectUI" :class="{'active': selectActive == 'money'}">
           <span class="title">月薪：</span>
           <div class="selectUI-text text" @click.stop="clickSelect('money')">
-            <span>不限</span>
+            <span>{{selectMoneyType}}</span>
             <i></i>
             <ul>
               <li>
-                <a href="javascript:;" v-for="(item, index) of obj['money']" :key="index" @click="clickListNav(obj['money'], item)">
+                <a href="javascript:;" v-for="(item, index) of obj['money']" :key="index" @click="activeChange(obj['money'], item)">
                   {{item.name}}
                 </a>
               </li>
             </ul>
           </div>
         </div>
-        <div class="item type selectUI" :class="{'active': selectActive == 'property'}">
+        <div class="item type selectUI" :class="{'active': selectActive == 'property'}" style="display: none;">
           <span class="title">工作性质：</span>
           <div class="selectUI-text value text" @click.stop="clickSelect('property')">
-            <span>不限</span>
+            <span>{selectPropertyType}</span>
             <i></i>
             <ul>
               <li>
-                <a href="javascript:;" v-for="(item, index) of obj['property']" :key="index" @click="clickListNav(obj['property'], item)">
+                <a href="javascript:;" v-for="(item, index) of obj['property']" :key="index" @click.stop="activeChange(obj['property'], item)">
                   {{item.name}}
                 </a>
               </li>
@@ -85,88 +85,84 @@ export default {
         minYear: [
           {
             name: '不限',
+            limit: '0',
             active: true
           },
           {
-            name: '应届毕业生'
+            name: '最少1年',
+            limit: '1'
           },
           {
-            name: '3年及以下'
-          },
-          {
-            name: '3-5年'
-          },
-          {
-            name: '5-10年'
-          },
-          {
-            name: '10年以上'
-          },
-          {
-            name: '不要求'
+            name: '最少2年',
+            limit: '2'
           }
         ],
         academic: [
           {
-            id: '0',
+            limit: '0',
             name: '不限',
             active: true
           },
           {
-            id: '1',
+            limit: '1',
             name: '大专'
           },
           {
-            id: '2',
+            limit: '2',
             name: '本科'
           },
           {
-            id: '3',
+            limit: '3',
             name: '硕士'
           },
           {
-            id: '4',
+            limit: '4',
             name: '博士'
           }
         ],
         financing: [
           {
-            id: '0',
+            limit: '0',
             name: '不限',
             active: true
           },
           {
-            id: '1',
+            limit: '1',
+            name: '不需要融资'
+          },
+          {
+            limit: '2',
             name: '未融资'
           },
           {
-            id: '2',
+            limit: '3',
             name: '天使轮'
           },
           {
-            id: '3',
+            limit: '4',
             name: 'A轮'
           },
           {
-            id: '4',
+            limit: '5',
             name: 'B轮'
           },
           {
-            id: '5',
+            limit: '6',
             name: 'C轮'
           },
           {
-            id: '6',
+            limit: '7',
             name: 'D轮及以上'
           },
           {
-            id: '7',
+            limit: '8',
             name: '上市'
           }
         ],
         property: [
           {
-            name: '不限'
+            name: '不限',
+            active: true
           },
           {
             name: '全职'
@@ -186,25 +182,33 @@ export default {
         ],
         money: [
           {
-            name: '不限'
+            name: '不限',
+            active: true,
+            limit: [0, 0]
           },
           {
-            name: '2k以下'
+            name: '2k以下',
+            limit: [1, 1999]
           },
           {
-            name: '2k-5k'
+            name: '2k-5k',
+            limit: [2000, 4999]
           },
           {
-            name: '5k-10k'
+            name: '5k-10k',
+            limit: [5000, 9999]
           },
           {
-            name: '10k-15k'
+            name: '10k-15k',
+            limit: [10000, 14999]
           },
           {
-            name: '25k-50k'
+            name: '25k-50k',
+            limit: [24999, 49999]
           },
           {
-            name: '50k以上'
+            name: '50k以上',
+            limit: [50000, 0]
           }
         ]
       },
@@ -213,27 +217,53 @@ export default {
     }
   },
   computed: {
+    // 所选月薪
+    selectMoneyType () {
+      return this.obj['money'].filter(val => {
+        return val.active
+      })[0]['name']
+    },
+    // 所选工作性质
+    selectPropertyType () {
+      return this.obj['property'].filter(val => {
+        return val.active
+      })[0]['name']
+    }
   },
   methods: {
     // 点击select框
     clickSelect (type) {
       // type 所点select框种类
+      // item 所点的数据
 
-      if (type === this.selectAcitve) {
-        this.selectAcitve = ''
+      // this.activeChange(this.obj[type], item)
+      if (type === this.selectActive) {
+        this.selectActive = ''
         return
       }
       this.selectActive = type
     },
-    // 点击列表导航
-    clickListNav (itemArr, item) {
-      // item 所点的列表对象
+    // 焦点变化
+    activeChange (itemArr, item) {
+      // item 所点的列表数据
       // itemArr item所属的对象
 
       itemArr.forEach((val, index, arr) => {
         this.$set(val, 'active', false)
       }, this)
       this.$set(item, 'active', true)
+
+      // 取消select框焦点
+      this.selectActive = ''
+    },
+    getSelector () {
+      let result = {}
+      Object.keys(this.obj).forEach((val, index, arr) => {
+        if (val !== 'money') {
+
+        }
+      }, this)
+      return result
     }
   },
   created () {
@@ -252,6 +282,20 @@ export default {
 
 
 /*!search-result/modules/common/main.less*/
+
+ul.filter-wrapper .multi-chosen a.active {
+    position: relative;
+      /* padding: 5px 7px 5px 8px;   */
+    background-color: #00b38a;
+    color: #fff;
+}
+
+ul.filter-wrapper .multi-chosen a.active .delete {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    background: url(https://www.lgstatic.com/www/static/search-result/modules/filter/img/delete_filter_icon_41c99f2.png) no-repeat
+}
 
 #lg_tnav .inner {
   width: 1200px

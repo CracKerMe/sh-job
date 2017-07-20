@@ -5,6 +5,7 @@
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
+import api from './api'
 
 Vue.use(Vuex)
 
@@ -21,7 +22,16 @@ const store = new Vuex.Store({
       state.developersList.delete(somebody)
     }
   },
-  modules: {}
+  actions: {
+    FetchTest () {
+      api.test().then(data => {
+        console.log(data)
+      })
+    }
+  },
+  modules: {
+
+  }
 })
 
 export default store
