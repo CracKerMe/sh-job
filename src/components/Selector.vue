@@ -276,7 +276,7 @@ export default {
     }
   },
   created () {
-
+    this.$store.dispatch('FetchJobList', this.getSelector())
   }
 }
 </script>

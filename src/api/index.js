@@ -1,7 +1,7 @@
 import http from '@/config/http'
 
 export default {
-  test () {
-    return http.get('')
+  getJobList (payload) {
+    return http.get('/job/getJobList', payload)
   }
 }

@@ -4,7 +4,7 @@ let baseURL
 let imgURL = ''
 
 if (process.env.NODE_ENV === 'development') { // 开发环境
-  baseURL = ''
+  baseURL = '/api'
 } else { // 生产环境
   baseURL = ''
 }
