@@ -23,8 +23,8 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    FetchTest () {
-      api.test().then(data => {
+    FetchJobList (payload) {
+      api.getJobList(payload).then(data => {
         console.log(data)
       })
     }

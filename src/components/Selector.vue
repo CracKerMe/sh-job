@@ -159,27 +159,27 @@ export default {
             name: '上市'
           }
         ],
-        property: [
-          {
-            name: '不限',
-            active: true
-          },
-          {
-            name: '全职'
-          },
-          {
-            name: '实习'
-          },
-          {
-            name: '私活'
-          },
-          {
-            name: '兼职'
-          },
-          {
-            name: '其他'
-          }
-        ],
+        // property: [
+        //   {
+        //     name: '不限',
+        //     active: true
+        //   },
+        //   {
+        //     name: '全职'
+        //   },
+        //   {
+        //     name: '实习'
+        //   },
+        //   {
+        //     name: '私活'
+        //   },
+        //   {
+        //     name: '兼职'
+        //   },
+        //   {
+        //     name: '其他'
+        //   }
+        // ],
         money: [
           {
             name: '不限',
@@ -253,21 +253,30 @@ export default {
       }, this)
       this.$set(item, 'active', true)
 
+      this.getSelector()
       // 取消select框焦点
       this.selectActive = ''
     },
     getSelector () {
       let result = {}
       Object.keys(this.obj).forEach((val, index, arr) => {
+        // 因为用户所选择的月薪是区间 但是相应的接口又是单独的 所以额外处理
+        let filterActive = this.obj[val].filter(filterVal => {
+          return filterVal['active']
+        })[0]['limit']
+        console.log(val)
         if (val !== 'money') {
-
+          result[val] = filterActive
+        } else {
+          result['minWage'] = filterActive[0]
+          result['maxWage'] = filterActive[1]
         }
       }, this)
       return result
     }
   },
   created () {
-
+    this.$store.dispatch('FetchJobList', this.getSelector())
   }
 }
 </script>
