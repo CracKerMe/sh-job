@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Homepage from 'page/Homepage'
 import Landpage from 'page/Landpage'
 import Jddetail from 'page/Jddetail'
+import Publishpage from 'page/Publishpage'
 
 Vue.use(Router)
 
@@ -21,6 +22,10 @@ export default new Router({
       name: 'jddetail',
       path: '/detail',
       component: Jddetail
+    }, {
+      name: 'publishpage',
+      path: '/publish',
+      component: Publishpage
     }
   ]
 })

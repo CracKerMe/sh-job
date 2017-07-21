@@ -1,10 +1,9 @@
-<!--<div>
-  /**
-  * Created by 王冬 on 2017/7/19.
-  * QQ: 20004604
-  * weChat: qq20004604
-  */
-</div>-->
+/**
+* Created by 王冬 on 2017/7/19.
+* QQ: 20004604
+* weChat: qq20004604
+* 页脚：目前功能为展示开发者列表
+*/
 <template>
   <div class="footer">
     <div class="main-table">
@@ -50,6 +49,7 @@
       }
     },
     computed: {
+      // 返回开发者列表，用于显示开发者的
       developers () {
         return [...this.$store.state.developersList]
       }
