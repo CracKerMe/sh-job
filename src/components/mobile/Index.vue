@@ -4,9 +4,8 @@
 * weChat: qq20004604
 */
 <template>
-  <div>
+  <div class="m-index">
     <theader></theader>
-    {{msg}}
     <transition name="silide">
       <router-view></router-view>
     </transition>
@@ -14,7 +13,9 @@
   </div>
 </template>
 <style scoped>
-
+  .m-index {
+    width: 100%;
+  }
 
 </style>
 <script>
