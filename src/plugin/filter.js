@@ -19,7 +19,6 @@ export default {
         '3': '硕士',
         '4': '博士'
       }
-      console.log(template[String(item)])
       if (item < 0 || item > 4) {
         return '错误的学历要求'
       } else {
@@ -40,7 +39,6 @@ export default {
         '7': 'D轮及以上',
         '8': '上市'
       }
-      console.log(template[String(item)])
       if (item < 0 || item > 8) {
         return '错误的融资程度'
       } else {
@@ -58,12 +56,16 @@ export default {
         '4': '私活',
         '5': '其他'
       }
-      console.log(template[String(item)])
       if (item < 0 || item > 8) {
         return '错误的职位类型'
       } else {
         return template[String(item)]
       }
+    })
+
+    // 格式化工资
+    Vue.filter('toFixedWage', function (number, afterComma = 0) {
+      return Number(number / 1000).toFixed(afterComma) + 'k'
     })
   }
 }

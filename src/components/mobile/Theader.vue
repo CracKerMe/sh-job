@@ -1,14 +1,30 @@
+/**
+* Created by 王冬 on 2017/7/22.
+* QQ: 20004604
+* weChat: qq20004604
+* 移动端首页
+*/
 <template>
   <div class="head">
+    <div class="topbar-box">
+      <div class="topbar-content">
+        <ul class="fl">
+          <li><a v-on:click.prevent="goMobile">切换到PC端</a></li>
+        </ul>
+        <ul class="fr">
+          <li><a v-on:click.prevent="doLogin">登录</a></li>
+          <li><a v-on:click.prevent="doRegister">邀请注册</a></li>
+        </ul>
+      </div>
+    </div>
     <div class="top">
-      <img class="fl" src="../assets/logo.png" alt="">
-      <span class="fl">上海站</span>
+      <img class="fl" src="../../assets/logo.png" alt="">
       <ul class="fl">
         <li class="fl">
-          <router-link to='/'>首页</router-link>
+          <div to='/'>首页</div>
         </li>
         <li class="fl">
-          <router-link to='/detail'>职位详情</router-link>
+          <div to='/detail'>职位详情</div>
         </li>
         <li class="fl">
           <router-link v-show="amILogin" to='/manage'>管理</router-link>
@@ -22,19 +38,16 @@
 </template>
 <script>
   export default {
-    name: 'theader',
+    name: 'mTheader',
     data () {
       return {
         amILogin: false,
-        developer: 'header作者'
+        developer: '零零水（20004604@qq.com）'
       }
     },
     methods: {
       doLogin: function (event) {
         console.log('登录')
-      },
-      doRegister: function (event) {
-        console.log('注册')
         this.$router.push('/login')
       },
       doRegister: function (event) {
@@ -42,7 +55,7 @@
       },
       // 切换到移动端首页
       goMobile () {
-        this.$router.push('/m')
+        this.$router.push('/')
       }
     }
   }

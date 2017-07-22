@@ -1,47 +1,11 @@
 <template>
   <div class="list-part">
-    <div v-for="item in items" :key="item.id">
-      <div class="list_item_top" :date-id="item.id">
-        <div class="position">
-          <div class="p_top">
-            <a>
-              <h2>web前端</h2>
-              <span class="area">[
-                <em>{{item.area}}</em>]</span>
-            </a>
-            <span class="format-time">{{item.ctime}}发布</span>
-          </div>
-          <div class="p_bot">
-            <div class="li_b_l">
-              <span class="money">15k-30k</span>
-              经验1-3年 / {{item.academic | get_academic}}
-            </div>
-          </div>
-        </div>
-        <div class="company">
-          <div class="company_name">
-            <a>{{item.company_name}}</a>
-          </div>
-          <div class="industry">
-            移动互联网,O2O / 成长型(A轮)
-          </div>
-        </div>
-        <div class="com_logo">
-          <a>
-            <img src="//www.lgstatic.com/thumbnail_120x120/image1/M00/29/ED/CgYXBlVoC3uAHMCKAABtFH9fMeg040.jpg" :alt="item.company_name" width="60" height="60">
-          </a>
-        </div>
-      </div>
-      <div class="list_item_bot">
-        <div class="li_b_l">
-          <span v-for="key in item.keywords" :key="key.id">{{key}}</span>
-        </div>
-        <div class="li_b_r">"奔向IPO,极客氛围,扁平式管理,新技术"</div>
-      </div>
-    </div>
+    <listitem :item="item" :key="item.id" v-for="item in items"></listitem>
   </div>
 </template>
 <script>
+import listitem from './listitem'
+
 export default {
   name: 'listview',
   data () {
@@ -52,7 +16,7 @@ export default {
         'area': '上海浦东新区',
         'minYear': '0',
         'academic': '2',
-        'finacing': '4',
+        'financing': '1',
         'minWage': '5000',
         'maxWage': '10000',
         'company_name': '上海艾艺文化有限公司',
@@ -64,7 +28,7 @@ export default {
         'area': '上海浦东新区',
         'minYear': '0',
         'academic': '2',
-        'finacing': '4',
+        'financing': '2',
         'minWage': '5000',
         'maxWage': '10000',
         'company_name': '上海艾艺文化有限公司',
@@ -76,7 +40,7 @@ export default {
         'area': '上海浦东新区',
         'minYear': '0',
         'academic': '2',
-        'finacing': '4',
+        'financing': '4',
         'minWage': '5000',
         'maxWage': '10000',
         'company_name': '上海艾艺文化有限公司',
@@ -85,29 +49,8 @@ export default {
       }]
     }
   },
-  filters: {
-    get_academic (key) {
-      let value = ''
-      // 0: 不要求，1: 大专，2: 本科，3: 硕士，4: 博士
-      switch (key) {
-        case '0':
-          value = '不要求'
-          break
-        case '1':
-          value = '大专'
-          break
-        case '2':
-          value = '本科'
-          break
-        case '3':
-          value = '硕士'
-          break
-        case '4':
-          value = '博士'
-          break
-      }
-      return value
-    }
+  components: {
+    listitem
   }
 }
 </script>
