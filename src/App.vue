@@ -1,22 +1,11 @@
 <template>
   <div id="app">
-		<theader></theader>
-		<transition name="silide">
-			<router-view></router-view>
-		</transition>
-    <tfooter></tfooter>
+    <router-view></router-view>
   </div>
 </template>
-
 <script>
-import Theader from 'component/Theader'
-import Tfooter from 'component/Foot'
 export default {
-  name: 'app',
-  components: {
-    Theader,
-    Tfooter
-  }
+  name: 'app'
 }
 </script>
 <style>
