@@ -37,9 +37,6 @@
         console.log('注册')
         this.$router.push('/login')
       },
-      doRegister: function (event) {
-        console.log('注册')
-      },
       // 切换到移动端首页
       goMobile () {
         this.$router.push('/m')
