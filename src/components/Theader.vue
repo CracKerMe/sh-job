@@ -1,16 +1,5 @@
 <template>
   <div class="head">
-    <div class="topbar-box">
-      <div class="topbar-content">
-        <ul class="fl">
-          <li><a v-on:click.prevent="goMobile">切换到移动端</a></li>
-        </ul>
-        <ul class="fr">
-          <li><a v-on:click.prevent="doLogin">登录</a></li>
-          <li><a v-on:click.prevent="doRegister">邀请注册</a></li>
-        </ul>
-      </div>
-    </div>
     <div class="top">
       <img class="fl" src="../assets/logo.png" alt="">
       <span class="fl">上海站</span>
@@ -43,6 +32,9 @@
     methods: {
       doLogin: function (event) {
         console.log('登录')
+      },
+      doRegister: function (event) {
+        console.log('注册')
         this.$router.push('/login')
       },
       doRegister: function (event) {
