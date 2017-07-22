@@ -16,7 +16,7 @@
           <router-link to='/'>首页</router-link>
         </li>
         <li class="fl">
-          <router-link to='/company'>公司</router-link>
+          <router-link to='/detail'>职位详情</router-link>
         </li>
         <li class="fl">
           <router-link v-show="amILogin" to='/manage'>管理</router-link>
@@ -40,6 +40,7 @@
     methods: {
       doLogin: function (event) {
         console.log('登录')
+        this.$router.push('/login')
       },
       doRegister: function (event) {
         console.log('注册')

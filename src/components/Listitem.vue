@@ -214,6 +214,7 @@
       gotoJobInfo () {
         var url = this.item.id
         console.log(url)
+        this.$router.push('/detail/' + url)
       }
     }
   }
