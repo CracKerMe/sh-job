@@ -3,17 +3,18 @@ import Router from 'vue-router'
 // import Listview from '@/components/Listview'
 // PC端首页
 import Index from 'component/Index'
-// 移动端首页
-const mIndex = resolve => require(['../components/mobile/Index.vue'], resolve)
-// 404
-const notFound = resolve => require(['../components/404'], resolve)
 // PC端组件
 import HomePage from 'page/Homepage'
 import Landpage from 'page/Landpage'
 import Jddetail from 'page/Jddetail'
 import Publishpage from 'page/Publishpage'
+// 移动端首页
+const mIndex = resolve => require(['../components/mobile/Index.vue'], resolve)
+// 404
+const notFound = resolve => require(['../components/404'], resolve)
 
 // 移动端组件
+const mListView = resolve => require(['../components/mobile/ListView.vue'], resolve)
 
 Vue.use(Router)
 
@@ -26,7 +27,7 @@ export default new Router({
       children: [
         {
           name: 'HomePage',
-          path: '',
+          path: 'list',
           component: HomePage
         },
         {
@@ -44,7 +45,15 @@ export default new Router({
           path: 'publish',
           component: Publishpage
         }
-      ]
+      ],
+      beforeEnter (to, from, next) {
+        if (to.fullPath === '/') {
+          next('/list')
+          return
+        } else {
+          next()
+        }
+      }
     },
     {
       name: 'MobileIndex',
@@ -52,11 +61,19 @@ export default new Router({
       component: mIndex,
       children: [
         {
-          name: 'HomePage',
-          path: '',
-          component: HomePage
+          name: 'mListView',
+          path: 'list',
+          component: mListView
         }
-      ]
+      ],
+      beforeEnter (to, from, next) {
+        if (to.fullPath === '/m') {
+          next('/m/list')
+          return
+        } else {
+          next()
+        }
+      }
     },
     {
       path: '*',
