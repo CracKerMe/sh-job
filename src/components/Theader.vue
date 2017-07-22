@@ -1,5 +1,13 @@
 <template>
   <div class="head">
+    <div class="topbar-box">
+      <div class="topbar-content">
+        <ul class="fr">
+          <li><a v-on:click.prevent="doLogin">登录</a></li>
+          <li><a v-on:click.prevent="doRegister">邀请注册</a></li>
+        </ul>
+      </div>
+    </div>
     <div class="top">
       <img class="fl" src="../assets/logo.png" alt="">
       <span class="fl">上海站</span>
@@ -15,7 +23,7 @@
         </li>
       </ul>
       <p class="fr">
-        <router-link to='/login'>登录</router-link>
+        <!--<router-link to='/login'>登录</router-link>-->
       </p>
     </div>
   </div>
@@ -27,6 +35,14 @@
       return {
         amILogin: false,
         developer: 'header作者'
+      }
+    },
+    methods: {
+      doLogin: function (event) {
+        console.log('登录')
+      },
+      doRegister: function (event) {
+        console.log('注册')
       }
     }
   }
@@ -44,10 +60,41 @@
 
   .head {
     width: 100%;
-    height: 56px;
     line-height: 56px;
-    padding: 0 10px;
     box-sizing: border-box;
+    .topbar-box {
+      height: 30px;
+      background-color: #333;
+      .topbar-content {
+        width: 1200px;
+        margin: 0 auto;
+        overflow: hidden;
+        > ul {
+          line-height: 30px;
+          font-size: 14px;
+          li {
+            float: left;
+            padding: 0 7.5px;
+            a {
+              width: 100%;
+              line-height: 15px;
+              color: #c4c3c3;
+              cursor: pointer;
+              &:hover {
+                color: #fff;
+              }
+            }
+          }
+          li + li {
+            padding: 0;
+            a {
+              padding-left: 7.5px;
+              border-left: 1px solid #5d5d5d;
+            }
+          }
+        }
+      }
+    }
     .top {
       max-width: 1200px;
       margin: 0 auto;
