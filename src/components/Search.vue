@@ -15,7 +15,7 @@
     overflow: hidden;
   }
   .keyword{
-    display: inline-block;
+    display: block;
     float: left;
     padding: 13px 15px;
     width: 76%;
@@ -41,6 +41,7 @@
     -ms-border-radius: 3px;
     border-radius: 3px;
     outline: none;
+    -webkit-appearance: none;
   }
   .adminSearch:hover{
     background-color: #00a57f;

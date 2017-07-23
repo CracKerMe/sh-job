@@ -19,9 +19,9 @@ export default {
         'financing': '1',
         'minWage': '5000',
         'maxWage': '10000',
-        'company_name': '上海艾艺文化有限公司',
+        'companyName': '上海艾艺文化有限公司',
         'jobType': '2',
-        'ctime': '2017-07012 13:00:00'
+        'ctime': '2017-07-12 13:00:00'
       }, {
         'id': '123',
         'keywords': ['高薪', '弹性工作'],
@@ -31,9 +31,9 @@ export default {
         'financing': '2',
         'minWage': '5000',
         'maxWage': '10000',
-        'company_name': '上海艾艺文化有限公司',
+        'companyName': '上海艾艺文化有限公司',
         'jobType': '2',
-        'ctime': '2017-07012 13:00:00'
+        'ctime': '2017-07-12 13:00:00'
       }, {
         'id': '123',
         'keywords': ['高薪', '弹性工作'],
@@ -43,9 +43,9 @@ export default {
         'financing': '4',
         'minWage': '5000',
         'maxWage': '10000',
-        'company_name': '上海艾艺文化有限公司',
+        'companyName': '上海艾艺文化有限公司',
         'jobType': '2',
-        'ctime': '2017-07012 13:00:00'
+        'ctime': '2017-07-12 13:00:00'
       }]
     }
   },

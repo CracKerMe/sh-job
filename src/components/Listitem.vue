@@ -57,7 +57,8 @@
       .p_top {
         height: 34px;
         line-height: 34px;
-
+        cursor: pointer;
+        
         h2 {
           float: left;
           max-width: 270px;
