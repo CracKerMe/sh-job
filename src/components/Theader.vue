@@ -1,22 +1,42 @@
+/**
+* Created by 王冬 on 2017/7/22.
+* QQ: 20004604
+* weChat: qq20004604
+* PC端顶部栏+菜单栏
+*
+* Updated by 鬼谷中妖 on 2017/7/23
+* QQ: 562550212
+*/
 <template>
   <div class="head">
-    <div class="top">
-      <img class="fl" src="../assets/logo.png" alt="">
-      <span class="fl">上海站</span>
-      <ul class="fl">
-        <li class="fl">
-          <router-link to='/'>首页</router-link>
-        </li>
-        <li class="fl">
-          <router-link to='/detail'>职位详情</router-link>
-        </li>
-        <li class="fl">
-          <router-link v-show="amILogin" to='/manage'>管理</router-link>
-        </li>
-      </ul>
-      <p class="fr">
-        <!--<router-link to='/login'>登录</router-link>-->
-      </p>
+    <!-- 鬼谷中妖 2017-7-23 头部添加登录/注册按钮 -->
+    <div class="topbar-box">
+      <div class="topbar-content">
+        <ul class="fr">
+          <li><a v-on:click.prevent="doLogin">登录</a></li>
+          <li><a v-on:click.prevent="doRegister">邀请注册</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- end 头部添加登录/注册按钮-->
+    <div class="top-box">
+      <div class="top">
+        <!-- <img class="fl" src="../assets/JS-logo.png" alt=""> -->
+        <ul class="fl">
+          <li class="fl ">
+            <router-link to='/' v-bind:class="{'menu-active': ($route.path==='/'||$route.path==='/list')}">首页</router-link>
+          </li>
+          <li class="fl">
+            <router-link to='/detail' v-bind:class="{'menu-active': ($route.path==='/detail')}">职位详情</router-link>
+          </li>
+          <li class="fl">
+            <router-link v-show="amILogin" to='/manage'>管理</router-link>
+          </li>
+        </ul>
+        <!-- <p class="fr">
+          <router-link to='/login'>登录</router-link>
+        </p> -->
+      </div>
     </div>
   </div>
 </template>
@@ -26,16 +46,19 @@
     data () {
       return {
         amILogin: false,
-        developer: 'header作者'
+        developer: '鬼谷中妖 woden0415@163.com'
       }
     },
     methods: {
+      // 登录
       doLogin: function (event) {
         console.log('登录')
-      },
-      doRegister: function (event) {
-        console.log('注册')
+        // 跳转到登录页面
         this.$router.push('/login')
+      },
+      // 注册
+      doRegister: function (event) {
+        console.log('邀请注册')
       },
       // 切换到移动端首页
       goMobile () {
@@ -57,11 +80,11 @@
 
   .head {
     width: 100%;
-    line-height: 56px;
+    /* line-height: 56px; */
     box-sizing: border-box;
     .topbar-box {
       height: 30px;
-      background-color: #333;
+      background-color: @color-grey333;
       .topbar-content {
         width: 1200px;
         margin: 0 auto;
@@ -92,10 +115,18 @@
         }
       }
     }
+    .top-box {
+      border-bottom: 1px solid #e5e5e5;
+      background-color: #fafafa;
+    }
     .top {
       max-width: 1200px;
       margin: 0 auto;
       overflow: hidden;
+      line-height: 56px;
+      background-image: url('../assets/JS-logo.png');
+      background-repeat: no-repeat;
+      background-size: contain;
       > img {
         height: 34px;
         margin-top: 11px;
@@ -105,10 +136,23 @@
       }
       ul {
         display: inline-block;
-        margin-left: 40px;
+        margin-left: 55px;
         overflow: hidden;
+        height: 58px;
         li {
           padding: 0 16px;
+          a {
+            color: @color-grey999;
+            display: inline-block;
+            height: 100%;
+            &:hover {
+              color: @color-grey333;
+            }
+          }
+          .menu-active {
+            color: @color-grey333;
+            border-bottom: 2px solid #00b38a;
+          }
         }
       }
     }
