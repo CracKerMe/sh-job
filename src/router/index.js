@@ -24,6 +24,9 @@ export default new Router({
       name: 'Index',
       path: '/',
       component: Index,
+      /* 鬼谷中妖 2017-7-23 qq562550212 */
+      /* 菜单栏，首页点击重定向到list页面 */
+      redirect: '/list',
       children: [
         {
           name: 'HomePage',
