@@ -276,7 +276,9 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('FetchJobList', this.getSelector())
+    /** 2017/07/24  零零水
+     *  移除这里的列表拉取（不应该放在这里）
+     */
   }
 }
 </script>

@@ -6,9 +6,11 @@ import router from './router'
 import 'common/less/config.less'
 import service from './plugin/service'
 import filter from './plugin/filter'
+import http from './api/index'
 Vue.config.productionTip = false
 Vue.use(service)
 Vue.use(filter)
+Vue.use(http)
 
 import store from './store'
 

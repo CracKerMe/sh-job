@@ -13,7 +13,7 @@ export default {
     // 学历的转换
     Vue.filter('filter_academic', function (item) {
       let template = {
-        '0': '无要求',
+        '0': '不限',
         '1': '大专',
         '2': '本科',
         '3': '硕士',
@@ -66,6 +66,49 @@ export default {
     // 格式化工资
     Vue.filter('toFixedWage', function (number, afterComma = 0) {
       return Number(number / 1000).toFixed(afterComma) + 'k'
+    })
+
+    // 工作经验
+    Vue.filter('filter_minYear', function (number) {
+      if (number === 0) {
+        return '经验不限'
+      } else {
+        return '至少' + number + '年'
+      }
+    })
+
+    // 格式化时间
+    Vue.filter('filter_time', function (time) {
+      /**
+       * 作者：姜凯丽(452930228@qq.com)
+       * 移植者：零零水(20004604@qq.com)
+       * 处理时间显示形式
+       * 转化成为 MM-DD HH: MM
+       * 并将日期为今天，明天，昨天的时间转化成 如‘今天 HH: MM’的形式
+       */
+      let date = (typeof time === 'number') ? new Date(time) : new Date((time || '').replace(/-/g, '/'))
+      let diff = (((new Date()).getTime() - date.getTime()) / 1000)
+      let dayDiff = Math.floor(diff / 86400)
+      let isValidDate = Object.prototype.toString.call(date) === '[object Date]' && !isNaN(date.getTime())
+
+      if (!isValidDate) {
+        console.error('not a valid date')
+        return time
+      }
+      let today = new Date(date)
+      // let year = today.getFullYear()
+      let month = ('0' + (today.getMonth() + 1)).slice(-2)
+      let day = ('0' + today.getDate()).slice(-2)
+      let hour = ('0' + today.getHours()).slice(-2)
+      let minute = ('0' + today.getMinutes()).slice(-2)
+      if (isNaN(dayDiff) || dayDiff < 0 || dayDiff > 3) {
+        return `${month}-${day} ${hour}:${minute}`
+      }
+      return dayDiff === 0 && (
+        diff < 86400 && `今天 ${hour}:${minute}`) ||
+        dayDiff < 2 && `昨天 ${hour}:${minute}` ||
+        dayDiff < 3 && `前天 ${hour}:${minute}` ||
+        dayDiff >= 3 && `${month}-${day} ${hour}:${minute}`
     })
   }
 }
