@@ -13,10 +13,6 @@
   </div>
 </template>
 <style scoped>
-  .m-index {
-    width: 100%;
-  }
-
 </style>
 <script>
   import Theader from './Theader'

@@ -15,12 +15,12 @@
         <div class="p_top" @click="gotoJobInfo">
           <h2>{{item.jobName?item.jobName : 'web前端'}}</h2>
           <span class="area">[<em>{{item.area}}</em>]</span>
-          <span class="format-time">{{item.ctime}}发布</span>
+          <span class="format-time">{{item.ctime | filter_time}}发布</span>
         </div>
         <div class="p_bot">
           <div class="li_b_l">
-            <span class="money">{{item.minWage | toFixedWage(1)}}-{{item.maxWage | toFixedWage(1)}}</span>
-            经验{{item.minYear}} / {{item.academic | filter_academic}}
+            <span class="money">{{item.minWage | toFixedWage(0)}}-{{item.maxWage | toFixedWage(0)}}</span>
+            {{item.minYear | filter_minYear}} / {{item.academic | filter_academic}}
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@
         height: 34px;
         line-height: 34px;
         cursor: pointer;
-        
+
         h2 {
           float: left;
           max-width: 270px;

@@ -40,7 +40,7 @@ export default new Router({
         },
         {
           name: 'jddetail',
-          path: 'detail',
+          path: 'detail/*',
           component: Jddetail
         },
         {
