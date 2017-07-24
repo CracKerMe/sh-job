@@ -1,11 +1,14 @@
 /**
-* Created by 王冬 on 2017/7/22.
+* Created by 零零水 on 2017/7/22.
 * QQ: 20004604
 * weChat: qq20004604
 * PC端顶部栏+菜单栏
 *
 * Updated by 鬼谷中妖 on 2017/7/23
 * QQ: 562550212
+*
+* Updated by 零零水 on 2017/07/24
+* 更新了登录相关逻辑
 */
 <template>
   <div class="head">
@@ -13,8 +16,13 @@
     <div class="topbar-box">
       <div class="topbar-content">
         <ul class="fr">
-          <li><a v-on:click.prevent="doLogin">登录</a></li>
-          <li><a v-on:click.prevent="doRegister">邀请注册</a></li>
+          <template v-if="!$store.state.user.isLogin">
+            <li><a v-on:click.prevent="doLogin">登录</a></li>
+            <li><a v-on:click.prevent="doRegister">邀请注册</a></li>
+          </template>
+          <template v-if="$store.state.user.isLogin">
+            <li><a>用户：{{$store.state.user.username}} 欢迎你</a></li>
+          </template>
         </ul>
       </div>
     </div>
@@ -24,7 +32,8 @@
         <!-- <img class="fl" src="../assets/JS-logo.png" alt=""> -->
         <ul class="fl">
           <li class="fl ">
-            <router-link to='/' v-bind:class="{'menu-active': ($route.path==='/'||$route.path==='/list')}">首页</router-link>
+            <router-link to='/' v-bind:class="{'menu-active': ($route.path==='/'||$route.path==='/list')}">首页
+            </router-link>
           </li>
           <li class="fl">
             <router-link to='/detail' v-bind:class="{'menu-active': ($route.path==='/detail')}">职位详情</router-link>
@@ -33,9 +42,9 @@
             <router-link v-show="amILogin" to='/manage'>管理</router-link>
           </li>
         </ul>
-        <!-- <p class="fr">
-          <router-link to='/login'>登录</router-link>
-        </p> -->
+        <p class="fr">
+          <router-link to='/publish'>发布职位</router-link>
+        </p>
       </div>
     </div>
   </div>
@@ -52,13 +61,12 @@
     methods: {
       // 登录
       doLogin: function (event) {
-        console.log('登录')
         // 跳转到登录页面
         this.$router.push('/login')
       },
       // 注册
       doRegister: function (event) {
-        console.log('邀请注册')
+        alert('目前采用邀请注册，请联系QQ：20004604')
       },
       // 切换到移动端首页
       goMobile () {
