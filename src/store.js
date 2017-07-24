@@ -5,9 +5,36 @@
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
-import api from './api'
+import http from '@/config/http'
 
 Vue.use(Vuex)
+
+let user = {
+  state: {
+    isLogin: false,
+    username: ''
+  },
+  mutations: {
+    login (state, payload) {
+      state.isLogin = true
+      state.username = payload.username
+      console.log(state.username)
+    },
+    logout (state) {
+      state.isLogin = false
+      state.username = ''
+    }
+  },
+  actions: {
+    tryLogin (context) {
+      http.post('/job/login').then(result => {
+        if (result.data.code === '200') {
+          context.commit('login', result.data)
+        }
+      })
+    }
+  }
+}
 
 const store = new Vuex.Store({
   state: {
@@ -22,15 +49,9 @@ const store = new Vuex.Store({
       state.developersList.delete(somebody)
     }
   },
-  actions: {
-    FetchJobList (payload) {
-      api.getJobList(payload).then(data => {
-        console.log(data)
-      })
-    }
-  },
+  actions: {},
   modules: {
-
+    user
   }
 })
 
