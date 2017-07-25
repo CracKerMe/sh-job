@@ -38,9 +38,9 @@
             <router-link to='/' v-bind:class="{'menu-active': ($route.path==='/'||$route.path==='/list')}">首页
             </router-link>
           </li>
-          <li class="fl">
-            <router-link to='/detail' v-bind:class="{'menu-active': ($route.path==='/detail')}">职位详情</router-link>
-          </li>
+          <!--<li class="fl">-->
+            <!--<router-link to='/detail' v-bind:class="{'menu-active': ($route.path==='/detail')}">职位详情</router-link>-->
+          <!--</li>-->
           <li class="fl">
             <router-link v-show="amILogin" to='/manage'>管理</router-link>
           </li>
