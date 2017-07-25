@@ -65,7 +65,21 @@
           } else if (this.checkComplex(this.password) < 3) {
             Toast('密码必须含有大小写字母、数字、标点符号三种以上')
           } else {
-            Toast('验证接口')
+            let data = {
+              username: this.account,
+              password: this.password
+            }
+            this.http.login(data).then(result => {
+              console.log(result.data)
+              if (result.data.code === '200') {
+                this.$store.commit('login', result.data)
+              } else {
+                Toast({
+                  message: result.data.msg,
+                  position: 'bottom'
+                })
+              }
+            })
           }
         }
       },
