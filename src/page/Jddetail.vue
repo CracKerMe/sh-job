@@ -181,6 +181,6 @@
     display: inline-block;
     resize: none;
     margin-top: 10px;
-    white-space: pre;
+    white-space: pre-wrap;
   }
 </style>
