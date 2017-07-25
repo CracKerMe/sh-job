@@ -180,15 +180,7 @@
         }
         var data = {}
         Object.keys(this.info).forEach(key => {
-          if (key === 'keywords') {
-            if (this.info[key].length === 0) {
-              data[key] = []
-            } else {
-              data[key] = this.info[key].split('，')
-            }
-          } else {
-            data[key] = this.info[key]
-          }
+          data[key] = this.info[key]
         })
         this.http.publishJob(data).then(result => {
           console.log(result)
@@ -197,7 +189,12 @@
             alert('发布成功！')
           } else {
             this.errorMessage = result.data.msg
-            this.errorMessage += '，缺少的属性为：' + result.data.missAttributes.join(', ')
+            if (result.data.error) {
+              this.errorMessage += '，报错信息为：' + result.data.error.join(', ')
+            }
+            if (result.data.missAttributes) {
+              this.errorMessage += '，缺少的属性为：' + result.data.missAttributes.join(', ')
+            }
           }
         })
       },

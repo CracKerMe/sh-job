@@ -60,6 +60,7 @@
         this.http.login(this.user).then(result => {
           if (result.data.code === '200') {
             this.$store.commit('login', result.data)
+            alert(result.data.msg ? result.data.msg : '登录成功')
           } else {
             alert('登录失败。' + result.data.msg)
           }
