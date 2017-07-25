@@ -10,6 +10,8 @@ import Jddetail from 'page/Jddetail'
 import Publishpage from 'page/Publishpage'
 // 移动端首页
 const mIndex = resolve => require(['../components/mobile/Index.vue'], resolve)
+// 移动端登录
+const mLogin = resolve => require(['../components/mobile/Login.vue'], resolve)
 // 404
 const notFound = resolve => require(['../components/404'], resolve)
 
@@ -77,6 +79,11 @@ export default new Router({
           next()
         }
       }
+    },
+    {
+      name: 'MobileLogin',
+      path: '/m/login',
+      component: mLogin
     },
     {
       path: '*',
