@@ -160,7 +160,10 @@
         areas: '全上海',
         exps: [],
         educations: [],
-        steps: []
+        steps: [],
+
+
+        developer: '歪歪歪（491397425@qq.com）'
 
       }
     },

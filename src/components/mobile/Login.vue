@@ -43,7 +43,7 @@
         account: null,
         password: null,
 
-        developer: '。（491397425@qq.com）'
+        developer: '歪歪歪（491397425@qq.com）'
       }
     },
     components: {
