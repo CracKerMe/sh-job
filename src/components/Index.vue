@@ -10,18 +10,21 @@
     <transition name="silide">
       <router-view></router-view>
     </transition>
+    <groupList></groupList>
     <tfooter></tfooter>
   </div>
 </template>
 <script>
   import Theader from './Theader'
   import Tfooter from './Foot'
+  import GroupList from './GroupList'
 
   export default {
     name: 'Index',
     components: {
       Theader,
-      Tfooter
+      Tfooter,
+      GroupList
     }
   }
 </script>
