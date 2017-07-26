@@ -15,6 +15,9 @@
     <!-- 鬼谷中妖 2017-7-23 头部添加登录/注册按钮 -->
     <div class="topbar-box">
       <div class="topbar-content">
+        <ul class="fl">
+          <li><a>目前不提供登出功能，请清除缓存</a></li>
+        </ul>
         <ul class="fr">
           <template v-if="!$store.state.user.isLogin">
             <li><a v-on:click.prevent="doLogin">登录</a></li>
@@ -31,19 +34,19 @@
       <div class="top">
         <!-- <img class="fl" src="../assets/JS-logo.png" alt=""> -->
         <ul class="fl">
-          <li class="fl ">
+          <li class="fl">
             <router-link to='/' v-bind:class="{'menu-active': ($route.path==='/'||$route.path==='/list')}">首页
             </router-link>
           </li>
-          <li class="fl">
-            <router-link to='/detail' v-bind:class="{'menu-active': ($route.path==='/detail')}">职位详情</router-link>
-          </li>
+          <!--<li class="fl">-->
+            <!--<router-link to='/detail' v-bind:class="{'menu-active': ($route.path==='/detail')}">职位详情</router-link>-->
+          <!--</li>-->
           <li class="fl">
             <router-link v-show="amILogin" to='/manage'>管理</router-link>
           </li>
         </ul>
         <p class="fr">
-          <router-link to='/publish'>发布职位</router-link>
+          <router-link to='/publish' v-if="$store.state.user.isLogin">发布职位</router-link>
         </p>
       </div>
     </div>

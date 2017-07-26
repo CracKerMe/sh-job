@@ -7,26 +7,26 @@
     <!-- 列表组件 -->
     <listview></listview>
     <!-- 分页插件 -->
-		<pagination for="some-entity" :records="500"></pagination>
+		<!-- <pagination for="some-entity" :records="500"></pagination> -->
   </div>
 </template>
 <script>
   import Search from 'component/Search'
   import Selector from 'component/Selector'
   import Listview from 'component/Listview'
-  import { Pagination, PaginationEvent } from 'vue-pagination-2'
+  // import { Pagination, PaginationEvent } from 'vue-pagination-2'
   export default {
     name: 'Homepage',
     components: {
-      Pagination,
+      // Pagination,
       Search,
       Selector,
       Listview
     }
   }
-  PaginationEvent.$on('vue-pagination::some-entity', function (page) {
-      // display the relevant records using the page param
-})
+//   PaginationEvent.$on('vue-pagination::some-entity', function (page) {
+//       // display the relevant records using the page param
+// })
 </script>
 <style>
    .app{
@@ -36,7 +36,7 @@
     padding: 10px;
     box-sizing: border-box;
   } 
-	.VuePagination__pagination-item{
+	/* .VuePagination__pagination-item{
 		display: inline-block;
     border: 1px solid #ededed;
     height: 21px;
@@ -55,5 +55,5 @@
     color: #fff!important;
     font-weight: 700;
     border-color: #00b38a!important;
-  }
+  } */
 </style>
