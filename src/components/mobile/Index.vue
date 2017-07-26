@@ -6,6 +6,7 @@
 <template>
   <div class="m-index">
     <theader></theader>
+    <filterBar></filterBar>
     <transition name="silide">
       <router-view></router-view>
     </transition>
@@ -16,7 +17,8 @@
 </style>
 <script>
   import Theader from './Theader'
-  import Tfooter from '../Foot'
+  import FilterBar from './FilterBar'
+  import Tfooter from './Foot'
 
   export default {
     name: 'mobileIndex',
@@ -28,7 +30,8 @@
     },
     components: {
       Theader,
-      Tfooter
+      Tfooter,
+      FilterBar
     }
   }
 </script>

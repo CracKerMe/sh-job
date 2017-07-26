@@ -28,22 +28,27 @@
     <span class="btn-forget" @click="toForget">
       忘记密码?
     </span>
+    <tfooter></tfooter>
   </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
   // 组件
   import inputDel from './inputDel.vue'
   import Toast from './toast/toast.js'
+  import Tfooter from './Foot'
   export default {
     data () {
       return {
         account: null,
-        password: null
+        password: null,
+
+        developer: '。（491397425@qq.com）'
       }
     },
     components: {
-      inputDel
+      inputDel,
+      Tfooter
     },
     created () {
 
