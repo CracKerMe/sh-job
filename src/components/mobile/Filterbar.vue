@@ -161,8 +161,6 @@
         exps: [],
         educations: [],
         steps: [],
-
-
         developer: '歪歪歪（491397425@qq.com）'
 
       }
