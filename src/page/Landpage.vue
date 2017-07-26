@@ -17,11 +17,12 @@
         </div>
         <div class="form_body" data-view="passwordLogin">
           <div class="input_item clearfix" data-propertyname="username" data-controltype="Phone">
-            <input type="text" class="input input_white" id="" name="" placeholder="请输入常用手机号/邮箱"
+            <input type="text" class="input input_white" v-model="user.username" name="" placeholder="请输入常用手机号/邮箱"
                    data-required="required" autocomplete="off">
           </div>
           <div class="input_item clearfix" data-propertyname="password" data-controltype="Password">
-            <input type="password" class="input input_white" id="" name="" placeholder="请输入密码" data-required="required"
+            <input type="password" class="input input_white" v-model="user.password" name="" placeholder="请输入密码"
+                   data-required="required"
                    autocomplete="off">
           </div>
           <div class="input_item clearfix">
@@ -42,18 +43,26 @@
 <script>
   export default {
     name: 'landpage',
+    data () {
+      return {
+        user: {
+          username: '',
+          password: ''
+        }
+      }
+    },
     methods: {
       login () {
-        let data = {
-          username: 'wd',
-          password: '123'
+        if (this.user.username.length === 0 || this.user.password.length === 0) {
+          alert('请输入用户名或者密码')
+          return
         }
-        this.http.login(data).then(result => {
-          console.log(result.data)
+        this.http.login(this.user).then(result => {
           if (result.data.code === '200') {
             this.$store.commit('login', result.data)
+            alert(result.data.msg ? result.data.msg : '登录成功')
           } else {
-            alert('登录失败')
+            alert('登录失败。' + result.data.msg)
           }
         })
       }

@@ -1,5 +1,5 @@
 /**
-* Created by 王冬 on 2017/7/19.
+* Created by 零零水 on 2017/7/19.
 * QQ: 20004604
 * weChat: qq20004604
 * 页脚：目前功能为展示开发者列表
@@ -7,6 +7,7 @@
 <template>
   <div class="footer">
     <div class="main-table">
+      <p class="title">本项目github链接：<a href="https://github.com/CracKerMe/sh-job">https://github.com/CracKerMe/sh-job</a></p>
       <p class="title">本页开发者列表（感谢那些做出贡献的人们）：</p>
       <p>
         <template v-if="developers.length>0">
@@ -45,7 +46,7 @@
     name: 'foot',
     data () {
       return {
-        developer: 'footer作者'
+        developer: '零零水(20004604@qq.com，页脚)'
       }
     },
     computed: {
