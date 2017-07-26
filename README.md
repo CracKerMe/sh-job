@@ -4,6 +4,16 @@
 
 http://www.jianwangsan.cn/job
 
+> Feature plan:
+
+1. 完善条件选择组件；
+2. 补完移动端内容；
+3. 增加关于专业技能的相关东西；
+4. 提交时增加更多字段。例如：联系电话，联系邮箱，发招聘人属于HR还是猎头或者其他；
+5. 增加求职者求职部分：具体来说，一个简化简历，然后自定义求职意向，别人可以查看；
+6. 增加访问者数量统计；
+7. 微信小程序；
+
 > a job-find website work for shanghai web front-end
 
 - Components
