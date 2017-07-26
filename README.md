@@ -1,6 +1,10 @@
 # sh-job
 
-> a job-find website work for shanghai web front-end 
+> Project demo:
+
+http://www.jianwangsan.cn/job
+
+> a job-find website work for shanghai web front-end
 
 - Components
   - Header(顶部导航区域)
