@@ -35,7 +35,7 @@
 <script type="text/ecmascript-6">
   // 组件
   import inputDel from './inputDel.vue'
-  import Toast from './toast/toast.js'
+  import Toast from './toast'
   import Tfooter from './Foot'
   export default {
     data () {
