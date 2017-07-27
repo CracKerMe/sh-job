@@ -19,7 +19,7 @@ ToastConstructor.prototype.close = function () {
 }
 const Toast = (options = {}) => {
   // 新建一个toast组件的子实例挂载到一个新创建的div上
-  var instance = new ToastConstructor().$mount(document.createElement('div'))
+  let instance = new ToastConstructor().$mount(document.createElement('div'))
   let duration = options.duration || 2500
   instance.message = typeof options === 'string' ? options : options.message
   instance.position = options.position || 'middle'
